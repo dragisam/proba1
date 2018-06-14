@@ -1,0 +1,19 @@
+version: '2'
+services:
+    proba1-app:
+        image: proba1
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://proba1-postgresql:5432/proba1
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=proba1-elasticsearch:9300
+        ports:
+            - 8080:8080
+    proba1-postgresql:
+        extends:
+            file: postgresql.yml
+            service: proba1-postgresql
+    proba1-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: proba1-elasticsearch
